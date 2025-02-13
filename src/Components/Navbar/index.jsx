@@ -20,31 +20,40 @@ const Navbar = () => {
                         All
                     </NavItem>
                 </li>
-                <li>
-                    <NavItem to="/clothes" activeStyle={activeStyle}>
+                {
+                    context.categories?.map((item, index) => (
+                        <li key={index}>
+                            <NavItem to={`/${item.toLowerCase()}`} activeStyle={activeStyle}>
+                                {item}
+                            </NavItem>
+                        </li>
+                    ))
+                }
+                {/* <li>
+                    <NavItem to="/:clothes" activeStyle={activeStyle}>
                         Clothes
                     </NavItem>
                 </li>
                 <li>
-                    <NavItem to="/electronics" activeStyle={activeStyle}>
+                    <NavItem to="/:electronics" activeStyle={activeStyle}>
                         Electronics
                     </NavItem>
                 </li>
                 <li>
-                    <NavItem to="/furnitures" activeStyle={activeStyle}>
-                        Furnitures
+                    <NavItem to="/:furniture" activeStyle={activeStyle}>
+                        Furniture
                     </NavItem>
                 </li>
                 <li>
-                    <NavItem to="/toys" activeStyle={activeStyle}>
-                        Toys
+                    <NavItem to="/:shoes" activeStyle={activeStyle}>
+                        Shoes
                     </NavItem>
                 </li>
                 <li>
-                    <NavItem to="/others" activeStyle={activeStyle}>
+                    <NavItem to="/:others" activeStyle={activeStyle}>
                         Others
                     </NavItem>
-                </li>
+                </li> */}
             </ul>
             <ul className='flex items-center gap-3'>
                 <li className='text-black/60'>
