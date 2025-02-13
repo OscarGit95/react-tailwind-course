@@ -14,21 +14,37 @@ export const ShoppingCartProvider = ({ children }) => {
     const [searchByTitle, setSearchByTitle] = useState('')
     const [filteredItems, setFilteredItems] = useState(null)
 
-    const filteredItemsByTitle = (items, searchByTitle) => {
-        return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    const filteredItemsByUser = (items, searchByTitle, categoryFilter) => {
+        const title = searchByTitle.toLowerCase().trim();  
+        const category = categoryFilter ? categoryFilter.toLowerCase().trim() : '';
+        
+        const search =  items?.filter(item => {
+            const itemTitle = item.title?.toLowerCase().trim() || '';
+            const matchesTitle = itemTitle.includes(title)
+            const itemCategory = item.category?.name?.toLowerCase().trim() || '';
+            const matchesCategory = !category || itemCategory === category;
+
+            return matchesTitle && matchesCategory
+        })
+        
+        return search;
     }
-    useEffect(() => {
-        (searchByTitle.length > 0) && setFilteredItems(filteredItemsByTitle(items, searchByTitle)) 
-    }, [items, searchByTitle])
+  
     
     //Search products by categories
     const [categories, setCategories] = useState([])
+    const [categoryFilter, setCategoryFilter] = useState(undefined)
     const getCategoriesByAPI = (data) => {
         setCategories(Array.from(new Set(data?.map(item => item.category.name))))
     }
     useEffect(() => {
         getCategoriesByAPI(items)
     }, [items])
+
+    //Filter
+    useEffect(() => {
+        setFilteredItems(filteredItemsByUser(items, searchByTitle, categoryFilter)) 
+    }, [items, searchByTitle, categoryFilter])
 
     //Shopping Cart . Counter
     const [count, setCount] = useState(0)
@@ -68,7 +84,9 @@ export const ShoppingCartProvider = ({ children }) => {
             searchByTitle,
             setSearchByTitle,
             filteredItems,
-            categories
+            categories,
+            categoryFilter,
+            setCategoryFilter
         }}>
             { children }
         </ShoppingCartContext.Provider>

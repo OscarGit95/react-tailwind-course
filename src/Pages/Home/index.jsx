@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { ShoppingCartContext } from '../../Context'
 import Layout from '../../Components/Layout'
@@ -7,16 +7,19 @@ import ProductDetail from '../../Components/ProductDetail'
 
 function Home() {
     const context = useContext(ShoppingCartContext)
-    const {category} = useParams()
-    // console.log(category)
+    const { category } = useParams()
+
+    useEffect(() => {
+        context.setCategoryFilter(category)
+    }, [category]);
+
     const renderView = () => {
-        const itemsToRender = context.searchByTitle?.length > 0 ? context.filteredItems : context.items
         return(
-            itemsToRender?.length > 0
+            context.filteredItems?.length > 0
             ?
                 <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
                     {
-                        itemsToRender?.map(item => (
+                        context.filteredItems?.map(item => (
                             <Card key={item.id} data={item}/>
                         ))
                     }
@@ -27,7 +30,7 @@ function Home() {
                 </div>
         )
     }
-
+    
     return (
         <Layout>
             <div className='flex justify-center items-center relative w-80 mb-4'>
