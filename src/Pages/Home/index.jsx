@@ -11,6 +11,7 @@ function Home() {
 
     useEffect(() => {
         context.setCategoryFilter(category)
+        context.setTitleFilter('')
     }, [category]);
 
     const renderView = () => {
@@ -42,6 +43,7 @@ function Home() {
                 id='' 
                 className='rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none' 
                 placeholder='Search a product'
+                value={context.titleFilter}
                 onChange={(e) => context.setTitleFilter(e.target.value)}
             />
             {

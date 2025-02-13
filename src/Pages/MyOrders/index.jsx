@@ -15,7 +15,7 @@ function MyOrders() {
             {
                 context.order.map((order, index) => (
                     <Link key={index} to={`/my-orders/${index}`}>
-                        <OrdersCard key={index} totalPrice={order.totalPrice} totalProducts={order.totalProducts}/>
+                        <OrdersCard key={index} date={order.date} totalPrice={order.totalPrice} totalProducts={order.totalProducts}/>
                     </Link>
                 ))
             }
