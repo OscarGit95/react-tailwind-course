@@ -11,7 +11,6 @@ const Card = (data) => {
         context.openProductDetail()
     }
     const addProductsToCart = (productData) => {
-        context.setCount(context.count + 1)
         context.setCartProducts((prevCartProducts) => [...prevCartProducts, productData])
         context.closeProductDetail()
         context.openCheckoutSideMenu()

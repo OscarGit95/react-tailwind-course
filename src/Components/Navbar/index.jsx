@@ -29,31 +29,6 @@ const Navbar = () => {
                         </li>
                     ))
                 }
-                {/* <li>
-                    <NavItem to="/:clothes" activeStyle={activeStyle}>
-                        Clothes
-                    </NavItem>
-                </li>
-                <li>
-                    <NavItem to="/:electronics" activeStyle={activeStyle}>
-                        Electronics
-                    </NavItem>
-                </li>
-                <li>
-                    <NavItem to="/:furniture" activeStyle={activeStyle}>
-                        Furniture
-                    </NavItem>
-                </li>
-                <li>
-                    <NavItem to="/:shoes" activeStyle={activeStyle}>
-                        Shoes
-                    </NavItem>
-                </li>
-                <li>
-                    <NavItem to="/:others" activeStyle={activeStyle}>
-                        Others
-                    </NavItem>
-                </li> */}
             </ul>
             <ul className='flex items-center gap-3'>
                 <li className='text-black/60'>
@@ -77,7 +52,7 @@ const Navbar = () => {
                 <li className='flex items-center'>
                     <ShoppingBagIcon className='h-6 w-6 text-black'/> 
                     <div>
-                        {context.count}
+                        {context.cartProducts.length}
                     </div>
                 </li>
             </ul>
