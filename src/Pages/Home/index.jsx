@@ -42,7 +42,7 @@ function Home() {
                 id='' 
                 className='rounded-lg border border-black w-80 p-4 mb-4 focus:outline-none' 
                 placeholder='Search a product'
-                onChange={(e) => context.setSearchByTitle(e.target.value)}
+                onChange={(e) => context.setTitleFilter(e.target.value)}
             />
             {
                 renderView()

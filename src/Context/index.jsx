@@ -11,11 +11,11 @@ export const ShoppingCartProvider = ({ children }) => {
             .then(data => setItems(data))
     }, [])
     //Search products by title
-    const [searchByTitle, setSearchByTitle] = useState('')
+    const [titleFilter, setTitleFilter] = useState('')
     const [filteredItems, setFilteredItems] = useState(null)
 
-    const filteredItemsByUser = (items, searchByTitle, categoryFilter) => {
-        const title = searchByTitle.toLowerCase().trim();  
+    const filteredItemsByUser = (items, titleFilter, categoryFilter) => {
+        const title = titleFilter.toLowerCase().trim();  
         const category = categoryFilter ? categoryFilter.toLowerCase().trim() : '';
         
         const search =  items?.filter(item => {
@@ -26,7 +26,7 @@ export const ShoppingCartProvider = ({ children }) => {
 
             return matchesTitle && matchesCategory
         })
-        
+
         return search;
     }
   
@@ -43,8 +43,8 @@ export const ShoppingCartProvider = ({ children }) => {
 
     //Filter
     useEffect(() => {
-        setFilteredItems(filteredItemsByUser(items, searchByTitle, categoryFilter)) 
-    }, [items, searchByTitle, categoryFilter])
+        setFilteredItems(filteredItemsByUser(items, titleFilter, categoryFilter)) 
+    }, [items, titleFilter, categoryFilter])
 
     //Shopping Cart . Counter
     const [count, setCount] = useState(0)
@@ -81,8 +81,8 @@ export const ShoppingCartProvider = ({ children }) => {
             setOrder,
             items,
             setItems,
-            searchByTitle,
-            setSearchByTitle,
+            titleFilter,
+            setTitleFilter,
             filteredItems,
             categories,
             categoryFilter,
